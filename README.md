@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# POS Restaurante (React Native / Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Descripción
+Esta aplicación simula un **sistema de Punto de Venta (POS)** para restaurantes, implementada en **React Native con Expo**.  
+Permite gestionar empresas, productos, precios de venta, movimientos de inventario y usuarios, utilizando **Context API** y **Hooks** para manejo de estado en memoria (sin base de datos externa).
 
-## Get started
+La app incluye:
+- Registro de **empresas** y **usuarios**.
+- Gestión de **productos** asociados a empresas.
+- Registro de **movimientos de inventario** (ENTRADA).
+- Definición de **precios de venta** con fecha de vigencia.
+- Interfaz basada en **DropDownPicker**, inputs estilizados y mensajes de éxito.
+- Navegación con **expo-router** y pestañas personalizadas con `HapticTab`.
 
-1. Install dependencies
+## Arquitectura
 
-   ```bash
-   npm install
-   ```
+### Manejo de Estado
+- **GlobalState.tsx** implementa un **Context API** que centraliza:
+  - `empresas`, `usuarios`, `roles`, `productos`, `movimientos`, `precios`, `usuarioLogueado`.
+- **Hooks**:
+  - `useState` para estados locales de formularios y listas filtradas.
+  - Context API proporciona funciones globales como `crearProducto`, `registrarMovimiento`, `crearPrecio`, `crearUsuario`, `loginUsuario`.
 
-2. Start the app
+### Componentes
+- **Pantallas**:
+  - `UsuarioScreen` – Crear y listar usuarios.
+  - `ProductoScreen` – Crear y listar productos por empresa.
+  - `MovimientoScreen` – Registrar movimientos de inventario filtrados por empresa.
+  - `PrecioScreen` – Crear precios de venta asociados a productos de la empresa seleccionada, con fecha de vigencia editable.
+  - `RolesScreen` – Consulta de roles predefinidos (Admin, Mesero, Cocinero).
 
-   ```bash
-   npx expo start
-   ```
+- **Diseño y UI**:
+  - Inputs, dropdowns y botones estilizados con **StyleSheet**.
+  - Fecha editable en web usando `react-datepicker` con estilo consistente.
+  - TabBar con `expo-router` y pestañas personalizadas que respetan esquema de color.
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Instalación y Ejecución
 
 ```bash
-npm run reset-project
-```
+# Clonar repositorio
+git clone https://github.com/Charlie22RM/pruebaTecnicaPosRestaurant.git
+cd posPruebaTecApp
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# Instalar dependencias
+npm install
 
-## Learn more
+# Instalar dependencias adicionales
+npm install react-native-dropdown-picker react-datepicker date-fns
 
-To learn more about developing your project with Expo, look at the following resources:
+# Ejecutar en web
+npm run web
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Ejecutar en Android / iOS (requiere Expo Go)
+npm run android
+npm run ios
